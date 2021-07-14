@@ -1,10 +1,19 @@
 import { RouteProp } from "@react-navigation/native";
-import { Center, Image, Heading, Text, VStack, ScrollView } from "native-base";
+import {
+  Center,
+  Image,
+  Heading,
+  Text,
+  VStack,
+  ScrollView,
+  HStack,
+  Badge,
+} from "native-base";
 import React, { FC } from "react";
-import { RootStackParamList } from "../../App";
 import { Product } from "../../interfaces/products.interfaces";
+import { StackParamList } from "../Home/Home";
 
-type DetailsScreenRouteProp = RouteProp<RootStackParamList, "Details">;
+type DetailsScreenRouteProp = RouteProp<StackParamList, "Details">;
 
 interface Props {
   data: Product;
@@ -14,7 +23,7 @@ interface Props {
 const Details: FC<Props> = ({ route }) => {
   const { data } = route.params;
   return (
-    <ScrollView bgColor="white">
+    <ScrollView bgColor="white" paddingTop={5}>
       <Center bgColor="white" width="100%" paddingY={5}>
         <Image
           size="2xl"
@@ -24,7 +33,7 @@ const Details: FC<Props> = ({ route }) => {
         />
       </Center>
       <VStack
-        paddingX={4}
+        paddingX={6}
         width="100%"
         display="flex"
         marginTop={4}
@@ -33,9 +42,18 @@ const Details: FC<Props> = ({ route }) => {
         justifyContent="flex-start"
       >
         <Heading fontWeight="semibold">{data.title}</Heading>
-        <Text fontSize="3xl" fontWeight={600} color="cyan.500">
-          {`${data.price}$`}
-        </Text>
+        <HStack
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Text fontSize="3xl" fontWeight={700} color="cyan.500">
+            {`${data.price}$`}
+          </Text>
+          <Badge colorScheme="info">
+            <Text fontSize="md">{data.category.toUpperCase()}</Text>
+          </Badge>
+        </HStack>
         <Text fontSize="lg" lineHeight="7">
           {data.description}
         </Text>

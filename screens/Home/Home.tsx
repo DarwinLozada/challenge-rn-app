@@ -1,27 +1,32 @@
-import { Center, Heading, Spinner, ScrollView } from "native-base";
 import React, { FC } from "react";
-import { setProducts } from "../../store/slices/products/products.actions";
-import ProductsList from "../../components/ProductsList";
-import useProducts from "../../hooks/useProducts";
-import useAppStore from "../../store/app.store";
+import { useTheme } from "native-base";
+import Feed from "../Feed";
+import { Product } from "../../interfaces/products.interfaces";
+import { createStackNavigator } from "@react-navigation/stack";
+import Details from "../Details";
+
+export type StackParamList = {
+  Feed: undefined;
+  Details: { data: Product };
+};
 
 const Home: FC = () => {
-  const { dispatch } = useAppStore();
-
-  const { products, loading } = useProducts({
-    onSuccess: (data) => {
-      dispatch(setProducts(data));
-    },
-  });
+  const theme = useTheme();
+  const Stack = createStackNavigator<StackParamList>();
 
   return (
-    <Center width="100%" flex={1} alignItems="flex-start">
-      <Heading>See our new products!</Heading>
-      <ScrollView width="100%">
-        {products && <ProductsList products={products} loading={loading} />}
-        {loading && <Spinner />}
-      </ScrollView>
-    </Center>
+    <>
+      <Stack.Navigator initialRouteName="Feed">
+        <Stack.Screen
+          name="Feed"
+          component={Feed}
+          options={{
+            headerStyle: { backgroundColor: theme.colors.cyan["200"] },
+          }}
+        />
+        <Stack.Screen name="Details" component={Details} />
+      </Stack.Navigator>
+    </>
   );
 };
 
