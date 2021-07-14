@@ -17,7 +17,7 @@ interface Props {
 
 const ProductsList: FC<Props> = ({ products, loading }) => {
   return (
-    <Center width="100%" bg="white">
+    <Center bgColor="warmGray.50" display="flex" width="100%">
       {loading ? (
         <Spinner accessibilityLabel="Loading products" />
       ) : (
@@ -33,8 +33,8 @@ const ProductsList: FC<Props> = ({ products, loading }) => {
             },
           }}
         >
-          <Center width="100%" bg="white" bgColor="warmGray.50">
-            <VStack space={10} alignItems="center" width="80%">
+          <Center marginTop={40}>
+            <VStack space={10} alignItems="center" display="flex" width="90%">
               {products.map((product) => (
                 <ProductCard data={product} key={product.id} />
               ))}

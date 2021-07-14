@@ -7,9 +7,15 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./screens/Home";
 import { appStore } from "./store/app.store";
 import Details from "./screens/Details/Details";
+import { Product } from "./interfaces/products.interfaces";
+
+export type RootStackParamList = {
+  Home: undefined;
+  Details: { data: Product };
+};
 
 export default function App() {
-  const Stack = createStackNavigator();
+  const Stack = createStackNavigator<RootStackParamList>();
 
   return (
     <NativeBaseProvider>

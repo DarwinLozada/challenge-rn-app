@@ -9,7 +9,7 @@ export type Action = {
   payload: any;
 };
 
-export const setProducts = (product: Product): Action => ({
+export const setProducts = (products: Product[]): Action => ({
   type: ActionTypes.setProducts,
-  payload: product,
+  payload: products,
 });

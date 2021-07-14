@@ -18,7 +18,7 @@ const productsReducer: Reducer<ProductsState, Action> = (
     case ActionTypes.setProducts:
       return {
         ...state,
-        products: [...state.products, action.payload],
+        products: action.payload,
       };
     default:
       return state;
