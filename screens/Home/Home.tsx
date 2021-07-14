@@ -1,20 +1,19 @@
+import { Box, Center, Container, Heading } from "native-base";
 import React, { FC } from "react";
-import { View, Text } from "react-native";
-import useSWRNative from "@nandorojo/swr-react-native";
+import { View, Text, ScrollView } from "react-native";
+import ProductsList from "../../components/ProductsList";
+import useProducts from "../../hooks/useProducts";
 
 const Home: FC = () => {
-  const fetcher = async () => {
-    const data = await fetch("https://fakestoreapi.com/products");
-    return data.json();
-  };
-
-  const { data, error } = useSWRNative("productos", fetcher);
-  console.log(data);
+  const { products, loading } = useProducts();
 
   return (
-    <View>
-      <Text>Buenas amigos</Text>
-    </View>
+    <Center width="100%" flex={1} alignItems="flex-start">
+      <ScrollView>
+        <Heading>See our new products!</Heading>
+        <ProductsList products={products} loading={loading} />
+      </ScrollView>
+    </Center>
   );
 };
 

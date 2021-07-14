@@ -1,5 +1,9 @@
-import { Action } from "@interfaces/favoritesStore.interfaces";
-import { Product } from "@interfaces/products.interfaces";
+import { Product } from "../../../interfaces/products.interfaces";
+
+export type Action = {
+  type: ActionTypes;
+  payload: any;
+};
 
 export enum ActionTypes {
   addProduct = "ADD_PRODUCT",
