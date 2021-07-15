@@ -10,12 +10,17 @@ import {
   IconButton,
   VStack,
   useToast,
+  CloseIcon,
+  Badge,
 } from "native-base";
 import React, { FC } from "react";
 import { Product } from "../../interfaces/products.interfaces";
-import { HeartIcon } from "../Icons/Icons";
+import { HeartOutlineIcon } from "../Icons/Icons";
 import useAppStore from "../../store/app.store";
-import { addProduct } from "../../store/slices/favorites/favorites.actions";
+import {
+  addProduct,
+  removeProduct,
+} from "../../store/slices/favorites/favorites.actions";
 import { useNavigation } from "@react-navigation/native";
 
 interface Props {
@@ -41,7 +46,19 @@ const ProductCard: FC<Props> = ({ data, type }) => {
       title: `${data.title.slice(0, 16)}...`,
       description: "added to favorites",
       status: "success",
-      duration: 3000,
+      duration: 2000,
+      placement: "top",
+    });
+  };
+
+  const handleClickRemoveFavorites = () => {
+    dispatch(removeProduct(data.id));
+    toast.show({
+      title: `${data.title.slice(0, 16)}...`,
+      description: "removed from favorites",
+      status: "info",
+      duration: 2000,
+      placement: "top",
     });
   };
 
@@ -93,18 +110,18 @@ const ProductCard: FC<Props> = ({ data, type }) => {
                 fontSize="xl"
                 fontWeight="bold"
                 marginY={2}
-                color="cyan.500"
+                color="lightBlue.600"
               >
                 {`${data.price}$`}
               </Text>
             </VStack>
             <HStack display="flex" justifyContent="space-between">
-              <Button variant="outline" onPress={handleClickDetails}>
-                <Text>Details</Text>
+              <Button onPress={handleClickDetails} colorScheme="lightBlue">
+                <Text color="white">Details</Text>
               </Button>
               {isAddedToFavorites ? (
                 <HStack display="flex" alignItems="center" space={2}>
-                  <Text fontSize="lg" fontWeight={500}>
+                  <Text fontSize="md" fontWeight={500}>
                     Added
                   </Text>
                   <CheckIcon size={4} />
@@ -112,7 +129,7 @@ const ProductCard: FC<Props> = ({ data, type }) => {
               ) : (
                 <IconButton
                   onPress={handleClickAddFavorites}
-                  icon={<HeartIcon color="rose.600" />}
+                  icon={<HeartOutlineIcon color="rose.600" />}
                 />
               )}
             </HStack>
@@ -120,12 +137,14 @@ const ProductCard: FC<Props> = ({ data, type }) => {
         </Box>
       ) : (
         <HStack
-          width="100%"
+          maxWidth="100%"
           borderRadius="lg"
           shadow={1}
-          space={2}
+          space={3}
           bgColor="white"
-          paddingY={2}
+          paddingY={4}
+          paddingLeft={2}
+          alignItems="center"
           overflow="hidden"
         >
           <Box padding={1}>
@@ -136,14 +155,34 @@ const ProductCard: FC<Props> = ({ data, type }) => {
               resizeMode="contain"
             />
           </Box>
-          <VStack space={1} paddingY={2} bgColor="white" marginRight={2}>
-            <Text w="70%">
+          <VStack
+            space={3}
+            paddingY={2}
+            bgColor="white"
+            marginRight={2}
+            width="48%"
+          >
+            <Text>
               {data.title.length > MAX_TITLE_CHARACTERS
                 ? `${data.title.slice(0, MAX_TITLE_CHARACTERS)}...`
                 : data.title}
             </Text>
-            <Text>{data.price}</Text>
-            <Text>{data.category}</Text>
+            <Text
+              fontWeight="bold"
+              fontSize="xl"
+              color="lightBlue.600"
+            >{`${data.price} $`}</Text>
+            <Badge colorScheme="info" bgColor="lightBlue.600">
+              <Text fontSize="xs" color="white">
+                {data.category.toUpperCase()}
+              </Text>
+            </Badge>
+          </VStack>
+          <VStack alignSelf="flex-start">
+            <IconButton
+              icon={<CloseIcon size={4} />}
+              onPress={handleClickRemoveFavorites}
+            />
           </VStack>
         </HStack>
       )}

@@ -20,6 +20,13 @@ const favoritesReducer: Reducer<FavoritesState, Action> = (
         ...state,
         products: [...state.products, action.payload],
       };
+    case ActionTypes.removeProduct:
+      return {
+        ...state,
+        products: state.products.filter(
+          (product) => product.id !== action.payload
+        ),
+      };
     default:
       return state;
   }

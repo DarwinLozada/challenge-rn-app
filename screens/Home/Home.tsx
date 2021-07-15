@@ -20,11 +20,19 @@ const Home: FC = () => {
         <Stack.Screen
           name="Feed"
           component={Feed}
+          options={{ title: "My little shop" }}
+        />
+        <Stack.Screen
+          name="Details"
+          component={Details}
           options={{
-            headerStyle: { backgroundColor: theme.colors.cyan["200"] },
+            title: "Product details",
+            headerStyle: {
+              backgroundColor: theme.colors.lightBlue["600"],
+            },
+            headerTintColor: "#fff",
           }}
         />
-        <Stack.Screen name="Details" component={Details} />
       </Stack.Navigator>
     </>
   );

@@ -47,11 +47,13 @@ const Details: FC<Props> = ({ route }) => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Text fontSize="3xl" fontWeight={700} color="cyan.500">
+          <Text fontSize="3xl" fontWeight={700} color="lightBlue.600">
             {`${data.price}$`}
           </Text>
-          <Badge colorScheme="info">
-            <Text fontSize="md">{data.category.toUpperCase()}</Text>
+          <Badge colorScheme="info" bgColor="lightBlue.600">
+            <Text fontSize="md" color="white">
+              {data.category.toUpperCase()}
+            </Text>
           </Badge>
         </HStack>
         <Text fontSize="lg" lineHeight="7">

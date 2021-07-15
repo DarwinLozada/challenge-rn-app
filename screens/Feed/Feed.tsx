@@ -6,6 +6,7 @@ import {
   ScrollView,
   Text,
   VStack,
+  Box,
 } from "native-base";
 import { setProducts } from "../../store/slices/products/products.actions";
 import ProductsList from "../../components/ProductsList";
@@ -24,19 +25,21 @@ const Feed: FC = () => {
   return (
     <Center width="100%" flex={1} alignItems="flex-start">
       <ScrollView width="100%" bgColor="warmGray.50">
-        <VStack marginTop={8} marginX={3} space={4}>
-          <Heading>See our new products!</Heading>
-          <Text fontSize="lg">
-            check out our wide variety of products, from a leather jacket to a
-            graphics card
-          </Text>
-        </VStack>
+        <Center>
+          <VStack width="88%" marginTop={8} space={4}>
+            <Heading color="lightBlue.600">See our new products!</Heading>
+            <Text fontSize="lg">
+              check out our wide variety of products, from a leather jacket to a
+              graphics card
+            </Text>
+            {products && (
+              <Box marginTop={8} marginBottom={12}>
+                <ProductsList products={products} loading={loading} />
+              </Box>
+            )}
+          </VStack>
+        </Center>
 
-        {products && (
-          <Center marginTop={16}>
-            <ProductsList products={products} loading={loading} />
-          </Center>
-        )}
         {loading && (
           <Spinner
             accessibilityLabel="Loading products"
