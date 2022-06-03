@@ -56,7 +56,7 @@ const Details: FC<Props> = ({ route }) => {
             </Text>
           </Badge>
         </HStack>
-        <Text fontSize="lg" lineHeight="7">
+        <Text fontSize="lg">
           {data.description}
         </Text>
       </VStack>

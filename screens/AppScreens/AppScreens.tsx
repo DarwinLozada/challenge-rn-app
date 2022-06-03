@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { NavigationContainer, useTheme } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Product } from "../../interfaces/products.interfaces";
 import Home from "../Home";
@@ -27,14 +27,13 @@ const AppWrapper: FC = () => {
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Home"
-        tabBarOptions={{
-          activeTintColor: "lightBlue.600",
-          style: {
+        screenOptions={{
+          tabBarActiveTintColor: "lightBlue.600",
+          tabBarStyle: {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             paddingTop: 2,
-            height: 56,
           },
         }}
       >

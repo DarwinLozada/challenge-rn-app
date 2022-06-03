@@ -15,26 +15,29 @@ const Home: FC = () => {
   const Stack = createStackNavigator<StackParamList>();
 
   return (
-    <>
-      <Stack.Navigator initialRouteName="Feed">
-        <Stack.Screen
-          name="Feed"
-          component={Feed}
-          options={{ title: "My little shop" }}
-        />
-        <Stack.Screen
-          name="Details"
-          component={Details}
-          options={{
-            title: "Product details",
-            headerStyle: {
-              backgroundColor: theme.colors.lightBlue["600"],
-            },
-            headerTintColor: "#fff",
-          }}
-        />
-      </Stack.Navigator>
-    </>
+    <Stack.Navigator initialRouteName="Feed" screenOptions={{
+      cardStyle: {
+        backgroundColor: theme.colors.red["600"],
+        
+      }
+
+    }}>
+      <Stack.Screen
+        name="Feed"
+        component={Feed}
+      />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        options={{
+          title: "Product details",
+          headerStyle: {
+            backgroundColor: theme.colors.lightBlue["600"],
+          },
+          headerTintColor: "#fff",
+        }}
+      />
+    </Stack.Navigator>
   );
 };
 

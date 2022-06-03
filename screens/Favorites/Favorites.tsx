@@ -32,9 +32,8 @@ const Favorites: FC<Props> = () => {
   };
 
   return (
-    <ScrollView marginTop={20} paddingX={5}>
-      <Heading>Your favorite products</Heading>
-      <Center marginTop={12} marginBottom={9}>
+    <ScrollView marginTop={16} paddingX={5}>
+      <Center marginBottom={9}>
         <VStack space={5} width="100%">
           {products.length > 0 ? (
             products.map((product) => (
